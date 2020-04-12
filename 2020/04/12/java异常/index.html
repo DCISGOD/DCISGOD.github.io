@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Java异常 - DC博客</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="keywords" content="zhaoo,"> 
+  
+  <meta name="description" content="
+Throwable
+Java异常情况为两种Error..."> 
+  
+  <meta name="author" content="寒川"> 
+  <link rel="shortcut icon" href="/image/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/a11y-dark.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      highlight: true,
+      donate_alipay: '/image/alipay.jpg',
+      donate_wechat: '/image/wechat.jpg',
+      gitalk: {
+        enable: false,
+        clientID: '',
+        clientSecret: '',
+        id: window.location.pathname,
+        repo: '',
+        owner: '',
+        admin: ''
+      },
+      motto: {
+        api: '',
+        default: '人生就应该如同蜡烛，从头燃到尾始终光明。'
+      }
+    }
+  </script>
+
+  
+
+</head>
+<body class="lock-screen">
+  <div class="loading">
+  <div class="loading-wrap">
+    <div class="loading-spinner">
+      <div class="loading-bounce1"></div>
+      <div class="loading-bounce2"></div>
+    </div>
+  </div>
+</div>
+  <header>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>© 2020-2020 ♥ dcisgod<p>Hexo&zhaoo[GitHub](https://github.com/izhaoo/hexo-theme-zhaoo)</div>
+</nav>
+</header>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img src="/image/java%E5%BC%82%E5%B8%B8.jpg" draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Java异常</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-04-12</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1014</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <p><img src="https://img-blog.csdnimg.cn/20200303195708621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a><strong>Throwable</strong></h2><p><img src="https://img-blog.csdnimg.cn/20200303203116445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Java异常情况为两种Error错误和Excepion异常"><a href="#Java异常情况为两种Error错误和Excepion异常" class="headerlink" title="Java异常情况为两种Error错误和Excepion异常"></a><strong>Java异常情况为两种Error错误和Excepion异常</strong></h2><p>Error错误,指的是Java运行时的内部错误和资源耗尽错误，应用程序不会<br>抛出此类异常，一般情况会告知用户并自动结束程序，很少出现</p>
+<p>Excepion,异常又分为编译时异常和运行时异常，编译时异常会在程序编写界面直接提示错误（如包找不到，语法错误等）；运行时异常 会在代码运行的时候报错，常见有：</p>
+<p>IndexOutOfBoundsException：索引越界异常</p>
+<p>ArrayIndexOutOfBoundsException：数组越界异常</p>
+<p>ArithmeticException：算数运算异常</p>
+<p>IllegalArgumentException：非法参数异常</p>
+<p>ClassCastException：类型转换异常</p>
+<p>ClassNotFoundException：类未找到异常</p>
+<p>NullPointerException：空指针异常</p>
+<p>NumberFormatException：数据格式异常</p>
+<p>FileNotFoundException：文件未找到异常</p>
+<p>NoSuchElementException：没有这个元素异常（迭代器中到了末尾，还继续访问）</p>
+<h2 id="JVM的默认处理方案"><a href="#JVM的默认处理方案" class="headerlink" title="JVM的默认处理方案"></a><strong>JVM的默认处理方案</strong></h2><p>如果程序出现了异常，我们又没有处理该异常，最终JVM会做默认处理<br>JVM会把异常的名称，原因，位置等信息显示在控制台上 然后程序停止执行</p>
+<p><strong>异常处理try…catch</strong><br><img src="https://img-blog.csdnimg.cn/20200303203645830.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200303203743389.png" alt="在这里插入图片描述"></p>
+<p>执行流程<br>程序从try{}开始执行，当程序出现异常时，会自动生成一个异常类对象，该异常对象会被提交给java运行时系统，Java运行时系统会在接受到异常后，到catch中去寻找匹配的异常类，找到后进行异常处理，处理完毕程序可以接着往后边执行</p>
+<h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a><strong>自定义异常类</strong></h2><p>用户自定义异常都应该继承Exception基类，如果希望自定义Runtime异常，则应该继承RuntimeException基类，定义异常类时通常需要提供两个构造器，一个是无参数构造器，另一个是需要一个字符串参数的构造器，这个字符串作为该异常信息的描述信息（也就是异常对象的getMessage()方法返回的值）</p>
+<p><img src="https://img-blog.csdnimg.cn/20200303203531155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="throws"><a href="#throws" class="headerlink" title="throws"></a><strong>throws</strong></h2><p>虽然我们可以通过try catch 来处理异常，但并不是任何情况我们都有异常处理的权限，又时候我们处理不累异常，因此Java为我们提供了throws的解决方案<br>格式：<br>public 方法名（）throws 异常类名{}</p>
+<p><strong>throws和throw的区别</strong><br><img src="https://img-blog.csdnimg.cn/20200303203302138.png" alt="在这里插入图片描述"></p>
+
+    </section>
+    <section class="extra">
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img src="/image/alipay.jpg">
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+      
+<nav class="nav">
+  
+    <a href="/2020/04/12/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="iconfont iconleft"></i>Java数据结构</a>
+  
+  
+</nav>
+
+    </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#87CEFA'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>© 2020-2020 ♥ dcisgod<p>Hexo&zhaoo[GitHub](https://github.com/izhaoo/hexo-theme-zhaoo)</div>
+</footer>
+  <div class="fab fab-plus">
+  <i class="iconfont iconplus"></i>
+</div>
+<div class="fab fab-up">
+  <i class="iconfont iconcaret-up"></i>
+</div>
+<div class="fab fab-menu">
+  <i class="iconfont iconmenu"></i>
+</div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+</html>

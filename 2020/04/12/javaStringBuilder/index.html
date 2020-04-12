@@ -6,13 +6,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Archive - DC博客: 2020</title>
+  <title>javaStringBuilder - DC博客</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
   
-  <meta name="keywords" content="zhaoo,"> 
+  <meta name="keywords" content="zhaoo,Hexo,主题,配置说明"> 
   
+  <meta name="description" content="如果对字符串拼接，每次拼接，都会创建一个新的Strin..."> 
   
   <meta name="author" content="寒川"> 
   <link rel="shortcut icon" href="/image/favicon.ico">
@@ -103,41 +104,58 @@
 </nav>
 </header>
   <main id="main">
-  <section class="archive">
-    <div class="archive-container">
-      <div class="archive-post">
-        <h3 class="archive-total">归档: 4篇</h3>
-        
-        
-        
-        <h3 class="archive-year">2020</h3>
-        
-        <div class="archive-item">
-          <a class="archive-date" href="/2020/04/12/javaStringBuilder/">04/12</a>
-          <a class="archive-title" href="/2020/04/12/javaStringBuilder/">javaStringBuilder</a>
-        </div>
-        
-        
-        <div class="archive-item">
-          <a class="archive-date" href="/2020/04/12/javaFile/">04/12</a>
-          <a class="archive-title" href="/2020/04/12/javaFile/">java流</a>
-        </div>
-        
-        
-        <div class="archive-item">
-          <a class="archive-date" href="/2020/04/12/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">04/12</a>
-          <a class="archive-title" href="/2020/04/12/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Java数据结构</a>
-        </div>
-        
-        
-        <div class="archive-item">
-          <a class="archive-date" href="/2020/04/12/java%E5%BC%82%E5%B8%B8/">04/12</a>
-          <a class="archive-title" href="/2020/04/12/java%E5%BC%82%E5%B8%B8/">Java异常</a>
-        </div>
-        
-      </div>
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img src="/image/java%E5%AD%97%E7%AC%A6%E4%B8%B2.jpg" draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">javaStringBuilder</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-04-12</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>862</span>
     </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <p>如果对字符串拼接，每次拼接，都会创建一个新的String对象，即耗时又浪费内存空间，而这种操作又是不可避免的，我们就可以通过Java提供的StringBuilder类来解决这个问题。<br>StringBuilder是一个可变(对象中的内容可变)的字符串类，我们可以把它看成一个容器</p>
+<p>StringBuilder：可变<br>String：不可变<br>构造方法<br>public StringBuilder（）；<br>public StringBuilder（String str）;</p>
+<p>方法<br>public StringBuilder append（任意类型）； 添加数据，并<strong>返回对象本身</strong><br>大量字符串连接一定要用append（）方法，可以完成String的拼接，并且比String+的效率高N倍（由于String的拼接每次会创建新的对象）<br>    例：String s1=”abc”; String s2=”def”; s1+s2=”abcdef”;<br>    StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)…由于<strong>返回的是对象本身</strong>所以可以继续调用对象的方法，此方法也叫链式编程</p>
+<p>public StringBuilder reverse（）； 返回<strong>相反的字符序列</strong><br>例：StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)  输出sb为<strong>abcdef</strong><br>    sb.reverse;  输出sb为<strong>fedcba</strong></p>
+<p>StringBuilder 转换为String 通过toString()<br>StringBuilder sb = new StringBuilder();<br>String s = sb.toString;</p>
+<p>String 转换为StringBuilder 通过构造方法实现<br>String s = “abc”;<br>StringBuilder sb = new StringBuilder(s);</p>
+
+    </section>
+    <section class="extra">
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img src="/image/alipay.jpg">
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E9%A2%98/" rel="tag">主题</a></li></ul>
+
+      
+<nav class="nav">
+  
+  
+    <a href="/2020/04/12/javaFile/">java流<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
   </section>
+</article>
+  </div>
 </main>
   <footer class="footer">
   <div class="footer-social">
