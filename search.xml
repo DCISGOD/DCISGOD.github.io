@@ -1,55 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Java异常</title>
-    <url>/2020/04/12/java%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200303195708621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt=""></p>
-<h2 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a><strong>Throwable</strong></h2><p><img src="https://img-blog.csdnimg.cn/20200303203116445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="Java异常情况为两种Error错误和Excepion异常"><a href="#Java异常情况为两种Error错误和Excepion异常" class="headerlink" title="Java异常情况为两种Error错误和Excepion异常"></a><strong>Java异常情况为两种Error错误和Excepion异常</strong></h2><p>Error错误,指的是Java运行时的内部错误和资源耗尽错误，应用程序不会<br>抛出此类异常，一般情况会告知用户并自动结束程序，很少出现</p>
-<p>Excepion,异常又分为编译时异常和运行时异常，编译时异常会在程序编写界面直接提示错误（如包找不到，语法错误等）；运行时异常 会在代码运行的时候报错，常见有：</p>
-<p>IndexOutOfBoundsException：索引越界异常</p>
-<p>ArrayIndexOutOfBoundsException：数组越界异常</p>
-<p>ArithmeticException：算数运算异常</p>
-<p>IllegalArgumentException：非法参数异常</p>
-<p>ClassCastException：类型转换异常</p>
-<p>ClassNotFoundException：类未找到异常</p>
-<p>NullPointerException：空指针异常</p>
-<p>NumberFormatException：数据格式异常</p>
-<p>FileNotFoundException：文件未找到异常</p>
-<p>NoSuchElementException：没有这个元素异常（迭代器中到了末尾，还继续访问）</p>
-<h2 id="JVM的默认处理方案"><a href="#JVM的默认处理方案" class="headerlink" title="JVM的默认处理方案"></a><strong>JVM的默认处理方案</strong></h2><p>如果程序出现了异常，我们又没有处理该异常，最终JVM会做默认处理<br>JVM会把异常的名称，原因，位置等信息显示在控制台上 然后程序停止执行</p>
-<p><strong>异常处理try…catch</strong><br><img src="https://img-blog.csdnimg.cn/20200303203645830.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200303203743389.png" alt="在这里插入图片描述"></p>
-<p>执行流程<br>程序从try{}开始执行，当程序出现异常时，会自动生成一个异常类对象，该异常对象会被提交给java运行时系统，Java运行时系统会在接受到异常后，到catch中去寻找匹配的异常类，找到后进行异常处理，处理完毕程序可以接着往后边执行</p>
-<h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a><strong>自定义异常类</strong></h2><p>用户自定义异常都应该继承Exception基类，如果希望自定义Runtime异常，则应该继承RuntimeException基类，定义异常类时通常需要提供两个构造器，一个是无参数构造器，另一个是需要一个字符串参数的构造器，这个字符串作为该异常信息的描述信息（也就是异常对象的getMessage()方法返回的值）</p>
-<p><img src="https://img-blog.csdnimg.cn/20200303203531155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="throws"><a href="#throws" class="headerlink" title="throws"></a><strong>throws</strong></h2><p>虽然我们可以通过try catch 来处理异常，但并不是任何情况我们都有异常处理的权限，又时候我们处理不累异常，因此Java为我们提供了throws的解决方案<br>格式：<br>public 方法名（）throws 异常类名{}</p>
-<p><strong>throws和throw的区别</strong><br><img src="https://img-blog.csdnimg.cn/20200303203302138.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>javaExcepion</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javaStringBuilder</title>
-    <url>/2020/04/12/javaStringBuilder/</url>
-    <content><![CDATA[<p>如果对字符串拼接，每次拼接，都会创建一个新的String对象，即耗时又浪费内存空间，而这种操作又是不可避免的，我们就可以通过Java提供的StringBuilder类来解决这个问题。<br>StringBuilder是一个可变(对象中的内容可变)的字符串类，我们可以把它看成一个容器</p>
-<p>StringBuilder：可变<br>String：不可变<br>构造方法<br>public StringBuilder（）；<br>public StringBuilder（String str）;</p>
-<p>方法<br>public StringBuilder append（任意类型）； 添加数据，并<strong>返回对象本身</strong><br>大量字符串连接一定要用append（）方法，可以完成String的拼接，并且比String+的效率高N倍（由于String的拼接每次会创建新的对象）<br>    例：String s1=”abc”; String s2=”def”; s1+s2=”abcdef”;<br>    StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)…由于<strong>返回的是对象本身</strong>所以可以继续调用对象的方法，此方法也叫链式编程</p>
-<p>public StringBuilder reverse（）； 返回<strong>相反的字符序列</strong><br>例：StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)  输出sb为<strong>abcdef</strong><br>    sb.reverse;  输出sb为<strong>fedcba</strong></p>
-<p>StringBuilder 转换为String 通过toString()<br>StringBuilder sb = new StringBuilder();<br>String s = sb.toString;</p>
-<p>String 转换为StringBuilder 通过构造方法实现<br>String s = “abc”;<br>StringBuilder sb = new StringBuilder(s);</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>String</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java流</title>
     <url>/2020/04/12/javaFile/</url>
     <content><![CDATA[<h2 id="1-0-File概述与构造"><a href="#1-0-File概述与构造" class="headerlink" title="1.0 File概述与构造"></a>1.0 File概述与构造</h2><p><img src="https://img-blog.csdnimg.cn/20200308152155474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200308152832715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>指向一個文件，用以上三個方法都可以，但一般來説常用第一種（比較簡單）</p>
@@ -98,6 +49,23 @@
       </tags>
   </entry>
   <entry>
+    <title>javaStringBuilder</title>
+    <url>/2020/04/12/javaStringBuilder/</url>
+    <content><![CDATA[<p>如果对字符串拼接，每次拼接，都会创建一个新的String对象，即耗时又浪费内存空间，而这种操作又是不可避免的，我们就可以通过Java提供的StringBuilder类来解决这个问题。<br>StringBuilder是一个可变(对象中的内容可变)的字符串类，我们可以把它看成一个容器</p>
+<p>StringBuilder：可变<br>String：不可变<br>构造方法<br>public StringBuilder（）；<br>public StringBuilder（String str）;</p>
+<p>方法<br>public StringBuilder append（任意类型）； 添加数据，并<strong>返回对象本身</strong><br>大量字符串连接一定要用append（）方法，可以完成String的拼接，并且比String+的效率高N倍（由于String的拼接每次会创建新的对象）<br>    例：String s1=”abc”; String s2=”def”; s1+s2=”abcdef”;<br>    StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)…由于<strong>返回的是对象本身</strong>所以可以继续调用对象的方法，此方法也叫链式编程</p>
+<p>public StringBuilder reverse（）； 返回<strong>相反的字符序列</strong><br>例：StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)  输出sb为<strong>abcdef</strong><br>    sb.reverse;  输出sb为<strong>fedcba</strong></p>
+<p>StringBuilder 转换为String 通过toString()<br>StringBuilder sb = new StringBuilder();<br>String s = sb.toString;</p>
+<p>String 转换为StringBuilder 通过构造方法实现<br>String s = “abc”;<br>StringBuilder sb = new StringBuilder(s);</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java数据结构</title>
     <url>/2020/04/12/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<p><strong>栈</strong>：一种特殊的线性表，只允许在固定的一端进行插入和删除元素操作。进行数据插入和删除操作的一段称为栈顶，另一端称为栈底。栈中的数据元素遵守后进先出的原则。（吃了吐）<br><img src="https://img-blog.csdnimg.cn/20200306113004310.png" alt="在这里插入图片描述"><br><strong>压栈</strong>：栈的插入操作叫做进栈/压栈/入栈，入数据在栈底。<br><strong>出栈</strong>：栈的删除操作叫出栈，出数据在栈顶。<br><img src="https://img-blog.csdnimg.cn/2020030611303764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>队列</strong>：是另一种操作受限的线性表，是指只允许在表的一端进行插入操作的数据结构，具有“先进先出”的特点。（吃了拉）<br><img src="https://img-blog.csdnimg.cn/20200306113223725.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>队列分为两种，一种为顺序队列，一种为链队列。在这里重点讲顺序循环队列</p>
@@ -110,6 +78,38 @@
       </categories>
       <tags>
         <tag>javaData</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java异常</title>
+    <url>/2020/04/12/java%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200303195708621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a><strong>Throwable</strong></h2><p><img src="https://img-blog.csdnimg.cn/20200303203116445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Java异常情况为两种Error错误和Excepion异常"><a href="#Java异常情况为两种Error错误和Excepion异常" class="headerlink" title="Java异常情况为两种Error错误和Excepion异常"></a><strong>Java异常情况为两种Error错误和Excepion异常</strong></h2><p>Error错误,指的是Java运行时的内部错误和资源耗尽错误，应用程序不会<br>抛出此类异常，一般情况会告知用户并自动结束程序，很少出现</p>
+<p>Excepion,异常又分为编译时异常和运行时异常，编译时异常会在程序编写界面直接提示错误（如包找不到，语法错误等）；运行时异常 会在代码运行的时候报错，常见有：</p>
+<p>IndexOutOfBoundsException：索引越界异常</p>
+<p>ArrayIndexOutOfBoundsException：数组越界异常</p>
+<p>ArithmeticException：算数运算异常</p>
+<p>IllegalArgumentException：非法参数异常</p>
+<p>ClassCastException：类型转换异常</p>
+<p>ClassNotFoundException：类未找到异常</p>
+<p>NullPointerException：空指针异常</p>
+<p>NumberFormatException：数据格式异常</p>
+<p>FileNotFoundException：文件未找到异常</p>
+<p>NoSuchElementException：没有这个元素异常（迭代器中到了末尾，还继续访问）</p>
+<h2 id="JVM的默认处理方案"><a href="#JVM的默认处理方案" class="headerlink" title="JVM的默认处理方案"></a><strong>JVM的默认处理方案</strong></h2><p>如果程序出现了异常，我们又没有处理该异常，最终JVM会做默认处理<br>JVM会把异常的名称，原因，位置等信息显示在控制台上 然后程序停止执行</p>
+<p><strong>异常处理try…catch</strong><br><img src="https://img-blog.csdnimg.cn/20200303203645830.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200303203743389.png" alt="在这里插入图片描述"></p>
+<p>执行流程<br>程序从try{}开始执行，当程序出现异常时，会自动生成一个异常类对象，该异常对象会被提交给java运行时系统，Java运行时系统会在接受到异常后，到catch中去寻找匹配的异常类，找到后进行异常处理，处理完毕程序可以接着往后边执行</p>
+<h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a><strong>自定义异常类</strong></h2><p>用户自定义异常都应该继承Exception基类，如果希望自定义Runtime异常，则应该继承RuntimeException基类，定义异常类时通常需要提供两个构造器，一个是无参数构造器，另一个是需要一个字符串参数的构造器，这个字符串作为该异常信息的描述信息（也就是异常对象的getMessage()方法返回的值）</p>
+<p><img src="https://img-blog.csdnimg.cn/20200303203531155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="throws"><a href="#throws" class="headerlink" title="throws"></a><strong>throws</strong></h2><p>虽然我们可以通过try catch 来处理异常，但并不是任何情况我们都有异常处理的权限，又时候我们处理不累异常，因此Java为我们提供了throws的解决方案<br>格式：<br>public 方法名（）throws 异常类名{}</p>
+<p><strong>throws和throw的区别</strong><br><img src="https://img-blog.csdnimg.cn/20200303203302138.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>javaExcepion</tag>
       </tags>
   </entry>
 </search>
