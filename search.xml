@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>java读取文件</title>
+    <url>/2020/05/11/FileToArrayList/</url>
+    <content><![CDATA[<p> 一、需求：读取txt文件内容按成绩排序后输出</p>
+<p> 二、分析步骤：</p>
+<ol>
+<li>创建txt学生信息文件</li>
+<li>创建学生类</li>
+<li>创建字符缓冲输入流对象</li>
+<li>创建ArrayList集合</li>
+<li>调用缓冲输入流对象的方法读取数据</li>
+<li>把读取到的字符串数据读取到集合中</li>
+<li>释放资源</li>
+<li>遍历集合</li>
+</ol>
+<p>创建txt文件</p>
+<pre><code>姓名   成绩
+张三,50
+李四,20
+王五,100
+赵六,60</code></pre><p>读取时会跳过第一行标题，由于姓名与成绩之间用 英文逗号,隔开，下边会用split()来匹配 , 拆分字符串</p>
+<h2 id="创建学生类"><a href="#创建学生类" class="headerlink" title="创建学生类"></a>创建学生类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> collection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> cj;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> cj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.cj = cj;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCj</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> cj;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCj</span><span class="params">(<span class="keyword">int</span> cj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.cj = cj;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Student [name="</span> + name + <span class="string">", cj="</span> + cj + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建测试类FileToArrayListDemo"><a href="#创建测试类FileToArrayListDemo" class="headerlink" title="创建测试类FileToArrayListDemo"></a>创建测试类FileToArrayListDemo</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileToArrayListDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="comment">//防止乱码，并创建字符缓冲输入流对象</span></span><br><span class="line">		InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"E:/dc.txt"</span>),<span class="string">"utf8"</span>);</span><br><span class="line"></span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</span><br><span class="line">		<span class="comment">// 创建集合</span></span><br><span class="line">		ArrayList&lt;Student&gt; ar = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</span><br><span class="line">		<span class="comment">//line用以判断字符后边是否为空</span></span><br><span class="line">		String line;</span><br><span class="line">		<span class="comment">//in用以判断读取是否为第一行是则跳过</span></span><br><span class="line">		<span class="keyword">int</span> in = <span class="number">0</span>;</span><br><span class="line">		Student st = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="comment">// 切割字符串</span></span><br><span class="line">			String[] strAy = line.split(<span class="string">","</span>);</span><br><span class="line">			<span class="comment">// 创建学生对象</span></span><br><span class="line">			st = <span class="keyword">new</span> Student();</span><br><span class="line">			<span class="comment">// 跳过第一行标题行</span></span><br><span class="line">			<span class="keyword">if</span> (in == <span class="number">0</span>) &#123;</span><br><span class="line">				in++;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// 给学生对象设置属性值</span></span><br><span class="line">				st.setName(strAy[<span class="number">0</span>]);</span><br><span class="line">				<span class="comment">//Integer.parseInt用以把字符转换为数字</span></span><br><span class="line">				st.setCj(Integer.parseInt(strAy[<span class="number">1</span>]));</span><br><span class="line">				<span class="comment">//把对象添加到集合</span></span><br><span class="line">				ar.add(st);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		br.close();</span><br><span class="line">		<span class="comment">//用增强for循环查看写入集合后的内容</span></span><br><span class="line">		<span class="keyword">for</span> (Student s : ar) &#123;</span><br><span class="line">			System.out.println(s.getName() + <span class="string">","</span> + s.getCj());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 对List集合进行排序操作，这儿使用匿名内部类Collections来完成</span></span><br><span class="line">		Collections.sort(ar, <span class="keyword">new</span> Comparator&lt;Student&gt;() &#123;</span><br><span class="line">			<span class="comment">//重写该方法</span></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Student s1, Student s2)</span> </span>&#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">				<span class="comment">// 排序主要条件：按成绩排序</span></span><br><span class="line">				<span class="keyword">int</span> num = s1.getCj() - s2.getCj();</span><br><span class="line">				<span class="keyword">return</span> num;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">//用增强for循环查看排序后的结果</span></span><br><span class="line">		<span class="keyword">for</span> (Student s : ar) &#123;</span><br><span class="line">			System.out.println(s.getName() + <span class="string">","</span> + s.getCj());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 把排序好的信息写进指定文件</span></span><br><span class="line">		<span class="comment">//创建字符缓冲输出流对象</span></span><br><span class="line">		BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"E:/dcg.txt"</span>));</span><br><span class="line">		<span class="comment">//由于跳过了第一行标题，写入的时候手动添加进去</span></span><br><span class="line">		bw.write(<span class="string">"姓名   成绩\n"</span>);</span><br><span class="line">		<span class="keyword">for</span> (Student s : ar) &#123;</span><br><span class="line">			bw.write(s.getName() + <span class="string">"   "</span> + s.getCj());</span><br><span class="line">			bw.newLine();</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		bw.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后输入文件内容为</p>
+<pre><code>姓名   成绩
+李四   20
+张三   50
+赵六   60
+王五   100</code></pre>]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>javaio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo+next目录结构</title>
+    <url>/2020/05/12/Hexo+Next/</url>
+    <content><![CDATA[<h2 id="HEXO-默认目录结构："><a href="#HEXO-默认目录结构：" class="headerlink" title="HEXO 默认目录结构："></a>HEXO 默认目录结构：</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">├──</span> <span class="string">.deploy</span></span><br><span class="line"><span class="string">├──</span> <span class="string">public</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scaffolds</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_drafts</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">_posts</span></span><br><span class="line"><span class="string">├──</span> <span class="string">themes</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span></span><br><span class="line"><span class="string">└──</span> <span class="string">package.json</span></span><br></pre></td></tr></table></figure>
+<p>deploy：执行hexo deploy命令部署到GitHub上的内容目录</p>
+<p>public：执行hexo generate命令，输出的静态网页内容目录</p>
+<p>scaffolds：layout模板文件目录，其中的md文件可以添加编辑</p>
+<p>scripts：扩展脚本目录，这里可以自定义一些javascript脚本</p>
+<p>source：文章源码目录，该目录下的markdown和html文件均会被hexo处理。该页面对应repo的根目录，404文件、favicon.ico文件，CNAME文件等都应该放这里，该目录下可新建页面目录。</p>
+<p>drafts：草稿文章</p>
+<p>posts：发布文章</p>
+<p>themes：文件主题目录</p>
+<p>_config.yml：全局配置文件，大多数的设置都在这里</p>
+<p>package.json：应用程序数据，指明hexo的版本等信息，类似于一般软件中的关于按钮</p>
+<h2 id="next主题"><a href="#next主题" class="headerlink" title="next主题"></a>next主题</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">├──</span> <span class="string">.github</span>            <span class="comment">#git信息</span></span><br><span class="line"><span class="string">├──</span> <span class="string">languages</span>          <span class="comment">#多语言</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">default.yml</span>    <span class="comment">#默认语言</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">zh-Hans.yml</span>    <span class="comment">#简体中文</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">zh-tw.yml</span>      <span class="comment">#繁体中文</span></span><br><span class="line"><span class="string">├──</span> <span class="string">layout</span>             <span class="comment">#布局，根目录下的*.ejs文件是对主页，分页，存档等的控制</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_custom</span>        <span class="comment">#可以自己修改的模板，覆盖原有模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_header.swig</span>    <span class="comment">#头部样式</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_sidebar.swig</span>   <span class="comment">#侧边栏样式</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_macro</span>        	   <span class="comment">#可以自己修改的模板，覆盖原有模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">post.swig</span>      <span class="comment">#文章模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">reward.swig</span>    <span class="comment">#打赏模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">sidebar.swig</span>   <span class="comment">#侧边栏模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_partial</span>       <span class="comment">#局部的布局</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">head</span>       <span class="comment">#头部模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">search</span>     <span class="comment">#搜索模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">share</span>      <span class="comment">#分享模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_script</span>        <span class="comment">#局部的布局</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_third-party</span>   <span class="comment">#第三方模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_layout.swig</span>   <span class="comment">#主页面模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">index.swig</span>     <span class="comment">#主页面模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">page</span>           <span class="comment">#页面模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">tag.swig</span>       <span class="comment">#tag模板</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span>            <span class="comment">#script源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">tags</span>           <span class="comment">#tags的script源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">marge.js</span>       <span class="comment">#页面模板</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span>             <span class="comment">#源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">css</span>            <span class="comment">#css源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_common</span>    <span class="comment">#*.styl基础css</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_custom</span>    <span class="comment">#*.styl局部css</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">└──</span> <span class="string">_mixins</span>    <span class="comment">#mixins的css</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">fonts</span>          <span class="comment">#字体</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">images</span>         <span class="comment">#图片</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">uploads</span>        <span class="comment">#添加的文件</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">js</span>             <span class="comment">#javascript源代码</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span>        <span class="comment">#主题配置文件</span></span><br><span class="line"><span class="string">└──</span> <span class="string">README.md</span>          <span class="comment">#用GitHub的都知道</span></span><br></pre></td></tr></table></figure>
+<p>内容来自<br><a href="https://www.cnblogs.com/mrwuzs/p/7954438.html" target="_blank" rel="noopener">https://www.cnblogs.com/mrwuzs/p/7954438.html</a></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>next</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java流</title>
     <url>/2020/04/12/javaFile/</url>
     <content><![CDATA[<h2 id="1-0-File概述与构造"><a href="#1-0-File概述与构造" class="headerlink" title="1.0 File概述与构造"></a>1.0 File概述与构造</h2><p><img src="https://img-blog.csdnimg.cn/20200308152155474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200308152832715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>指向一個文件，用以上三個方法都可以，但一般來説常用第一種（比較簡單）</p>
@@ -46,6 +108,55 @@
       </categories>
       <tags>
         <tag>javaio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java异常</title>
+    <url>/2020/04/12/java%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200303195708621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a><strong>Throwable</strong></h2><p><img src="https://img-blog.csdnimg.cn/20200303203116445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Java异常情况为两种Error错误和Excepion异常"><a href="#Java异常情况为两种Error错误和Excepion异常" class="headerlink" title="Java异常情况为两种Error错误和Excepion异常"></a><strong>Java异常情况为两种Error错误和Excepion异常</strong></h2><p>Error错误,指的是Java运行时的内部错误和资源耗尽错误，应用程序不会<br>抛出此类异常，一般情况会告知用户并自动结束程序，很少出现</p>
+<p>Excepion,异常又分为编译时异常和运行时异常，编译时异常会在程序编写界面直接提示错误（如包找不到，语法错误等）；运行时异常 会在代码运行的时候报错，常见有：</p>
+<p>IndexOutOfBoundsException：索引越界异常</p>
+<p>ArrayIndexOutOfBoundsException：数组越界异常</p>
+<p>ArithmeticException：算数运算异常</p>
+<p>IllegalArgumentException：非法参数异常</p>
+<p>ClassCastException：类型转换异常</p>
+<p>ClassNotFoundException：类未找到异常</p>
+<p>NullPointerException：空指针异常</p>
+<p>NumberFormatException：数据格式异常</p>
+<p>FileNotFoundException：文件未找到异常</p>
+<p>NoSuchElementException：没有这个元素异常（迭代器中到了末尾，还继续访问）</p>
+<h2 id="JVM的默认处理方案"><a href="#JVM的默认处理方案" class="headerlink" title="JVM的默认处理方案"></a><strong>JVM的默认处理方案</strong></h2><p>如果程序出现了异常，我们又没有处理该异常，最终JVM会做默认处理<br>JVM会把异常的名称，原因，位置等信息显示在控制台上 然后程序停止执行</p>
+<p><strong>异常处理try…catch</strong><br><img src="https://img-blog.csdnimg.cn/20200303203645830.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200303203743389.png" alt="在这里插入图片描述"></p>
+<p>执行流程<br>程序从try{}开始执行，当程序出现异常时，会自动生成一个异常类对象，该异常对象会被提交给java运行时系统，Java运行时系统会在接受到异常后，到catch中去寻找匹配的异常类，找到后进行异常处理，处理完毕程序可以接着往后边执行</p>
+<h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a><strong>自定义异常类</strong></h2><p>用户自定义异常都应该继承Exception基类，如果希望自定义Runtime异常，则应该继承RuntimeException基类，定义异常类时通常需要提供两个构造器，一个是无参数构造器，另一个是需要一个字符串参数的构造器，这个字符串作为该异常信息的描述信息（也就是异常对象的getMessage()方法返回的值）</p>
+<p><img src="https://img-blog.csdnimg.cn/20200303203531155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="throws"><a href="#throws" class="headerlink" title="throws"></a><strong>throws</strong></h2><p>虽然我们可以通过try catch 来处理异常，但并不是任何情况我们都有异常处理的权限，又时候我们处理不累异常，因此Java为我们提供了throws的解决方案<br>格式：<br>public 方法名（）throws 异常类名{}</p>
+<p><strong>throws和throw的区别</strong><br><img src="https://img-blog.csdnimg.cn/20200303203302138.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>javaExcepion</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javaStringBuilder</title>
+    <url>/2020/04/12/javaStringBuilder/</url>
+    <content><![CDATA[<p>如果对字符串拼接，每次拼接，都会创建一个新的String对象，即耗时又浪费内存空间，而这种操作又是不可避免的，我们就可以通过Java提供的StringBuilder类来解决这个问题。<br>StringBuilder是一个可变(对象中的内容可变)的字符串类，我们可以把它看成一个容器</p>
+<p>StringBuilder：可变<br>String：不可变<br>构造方法<br>public StringBuilder（）；<br>public StringBuilder（String str）;</p>
+<p>方法<br>public StringBuilder append（任意类型）； 添加数据，并<strong>返回对象本身</strong><br>大量字符串连接一定要用append（）方法，可以完成String的拼接，并且比String+的效率高N倍（由于String的拼接每次会创建新的对象）<br>    例：String s1=”abc”; String s2=”def”; s1+s2=”abcdef”;<br>    StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)…由于<strong>返回的是对象本身</strong>所以可以继续调用对象的方法，此方法也叫链式编程</p>
+<p>public StringBuilder reverse（）； 返回<strong>相反的字符序列</strong><br>例：StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)  输出sb为<strong>abcdef</strong><br>    sb.reverse;  输出sb为<strong>fedcba</strong></p>
+<p>StringBuilder 转换为String 通过toString()<br>StringBuilder sb = new StringBuilder();<br>String s = sb.toString;</p>
+<p>String 转换为StringBuilder 通过构造方法实现<br>String s = “abc”;<br>StringBuilder sb = new StringBuilder(s);</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
       </tags>
   </entry>
   <entry>
@@ -265,85 +376,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo+next目录结构</title>
-    <url>/2020/05/12/Hexo+Next/</url>
-    <content><![CDATA[<h2 id="HEXO-默认目录结构："><a href="#HEXO-默认目录结构：" class="headerlink" title="HEXO 默认目录结构："></a>HEXO 默认目录结构：</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">├──</span> <span class="string">.deploy</span></span><br><span class="line"><span class="string">├──</span> <span class="string">public</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scaffolds</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_drafts</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">_posts</span></span><br><span class="line"><span class="string">├──</span> <span class="string">themes</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span></span><br><span class="line"><span class="string">└──</span> <span class="string">package.json</span></span><br></pre></td></tr></table></figure>
-<p>deploy：执行hexo deploy命令部署到GitHub上的内容目录</p>
-<p>public：执行hexo generate命令，输出的静态网页内容目录</p>
-<p>scaffolds：layout模板文件目录，其中的md文件可以添加编辑</p>
-<p>scripts：扩展脚本目录，这里可以自定义一些javascript脚本</p>
-<p>source：文章源码目录，该目录下的markdown和html文件均会被hexo处理。该页面对应repo的根目录，404文件、favicon.ico文件，CNAME文件等都应该放这里，该目录下可新建页面目录。</p>
-<p>drafts：草稿文章</p>
-<p>posts：发布文章</p>
-<p>themes：文件主题目录</p>
-<p>_config.yml：全局配置文件，大多数的设置都在这里</p>
-<p>package.json：应用程序数据，指明hexo的版本等信息，类似于一般软件中的关于按钮</p>
-<h2 id="next主题"><a href="#next主题" class="headerlink" title="next主题"></a>next主题</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">├──</span> <span class="string">.github</span>            <span class="comment">#git信息</span></span><br><span class="line"><span class="string">├──</span> <span class="string">languages</span>          <span class="comment">#多语言</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">default.yml</span>    <span class="comment">#默认语言</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">zh-Hans.yml</span>    <span class="comment">#简体中文</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">zh-tw.yml</span>      <span class="comment">#繁体中文</span></span><br><span class="line"><span class="string">├──</span> <span class="string">layout</span>             <span class="comment">#布局，根目录下的*.ejs文件是对主页，分页，存档等的控制</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_custom</span>        <span class="comment">#可以自己修改的模板，覆盖原有模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_header.swig</span>    <span class="comment">#头部样式</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_sidebar.swig</span>   <span class="comment">#侧边栏样式</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_macro</span>        	   <span class="comment">#可以自己修改的模板，覆盖原有模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">post.swig</span>      <span class="comment">#文章模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">reward.swig</span>    <span class="comment">#打赏模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">sidebar.swig</span>   <span class="comment">#侧边栏模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_partial</span>       <span class="comment">#局部的布局</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">head</span>       <span class="comment">#头部模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">search</span>     <span class="comment">#搜索模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">share</span>      <span class="comment">#分享模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_script</span>        <span class="comment">#局部的布局</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_third-party</span>   <span class="comment">#第三方模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_layout.swig</span>   <span class="comment">#主页面模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">index.swig</span>     <span class="comment">#主页面模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">page</span>           <span class="comment">#页面模板</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">tag.swig</span>       <span class="comment">#tag模板</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span>            <span class="comment">#script源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">tags</span>           <span class="comment">#tags的script源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">marge.js</span>       <span class="comment">#页面模板</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span>             <span class="comment">#源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">css</span>            <span class="comment">#css源码</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_common</span>    <span class="comment">#*.styl基础css</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">├──</span> <span class="string">_custom</span>    <span class="comment">#*.styl局部css</span></span><br><span class="line"><span class="string">|</span>   <span class="string">|</span>   <span class="string">└──</span> <span class="string">_mixins</span>    <span class="comment">#mixins的css</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">fonts</span>          <span class="comment">#字体</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">images</span>         <span class="comment">#图片</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">uploads</span>        <span class="comment">#添加的文件</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">js</span>             <span class="comment">#javascript源代码</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span>        <span class="comment">#主题配置文件</span></span><br><span class="line"><span class="string">└──</span> <span class="string">README.md</span>          <span class="comment">#用GitHub的都知道</span></span><br></pre></td></tr></table></figure>
-<p>内容来自<br><a href="https://www.cnblogs.com/mrwuzs/p/7954438.html" target="_blank" rel="noopener">https://www.cnblogs.com/mrwuzs/p/7954438.html</a></p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java读取文件</title>
-    <url>/2020/05/11/FileToArrayList/</url>
-    <content><![CDATA[<p> 一、需求：读取txt文件内容按成绩排序后输出</p>
-<p> 二、分析步骤：</p>
-<ol>
-<li>创建txt学生信息文件</li>
-<li>创建学生类</li>
-<li>创建字符缓冲输入流对象</li>
-<li>创建ArrayList集合</li>
-<li>调用缓冲输入流对象的方法读取数据</li>
-<li>把读取到的字符串数据读取到集合中</li>
-<li>释放资源</li>
-<li>遍历集合</li>
-</ol>
-<p>创建txt文件</p>
-<pre><code>姓名   成绩
-张三,50
-李四,20
-王五,100
-赵六,60</code></pre><p>读取时会跳过第一行标题，由于姓名与成绩之间用 英文逗号,隔开，下边会用split()来匹配 , 拆分字符串</p>
-<h2 id="创建学生类"><a href="#创建学生类" class="headerlink" title="创建学生类"></a>创建学生类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> collection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> cj;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> cj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.cj = cj;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCj</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> cj;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCj</span><span class="params">(<span class="keyword">int</span> cj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.cj = cj;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Student [name="</span> + name + <span class="string">", cj="</span> + cj + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建测试类FileToArrayListDemo"><a href="#创建测试类FileToArrayListDemo" class="headerlink" title="创建测试类FileToArrayListDemo"></a>创建测试类FileToArrayListDemo</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileToArrayListDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="comment">//防止乱码，并创建字符缓冲输入流对象</span></span><br><span class="line">		InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"E:/dc.txt"</span>),<span class="string">"utf8"</span>);</span><br><span class="line"></span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</span><br><span class="line">		<span class="comment">// 创建集合</span></span><br><span class="line">		ArrayList&lt;Student&gt; ar = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</span><br><span class="line">		<span class="comment">//line用以判断字符后边是否为空</span></span><br><span class="line">		String line;</span><br><span class="line">		<span class="comment">//in用以判断读取是否为第一行是则跳过</span></span><br><span class="line">		<span class="keyword">int</span> in = <span class="number">0</span>;</span><br><span class="line">		Student st = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="comment">// 切割字符串</span></span><br><span class="line">			String[] strAy = line.split(<span class="string">","</span>);</span><br><span class="line">			<span class="comment">// 创建学生对象</span></span><br><span class="line">			st = <span class="keyword">new</span> Student();</span><br><span class="line">			<span class="comment">// 跳过第一行标题行</span></span><br><span class="line">			<span class="keyword">if</span> (in == <span class="number">0</span>) &#123;</span><br><span class="line">				in++;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// 给学生对象设置属性值</span></span><br><span class="line">				st.setName(strAy[<span class="number">0</span>]);</span><br><span class="line">				<span class="comment">//Integer.parseInt用以把字符转换为数字</span></span><br><span class="line">				st.setCj(Integer.parseInt(strAy[<span class="number">1</span>]));</span><br><span class="line">				<span class="comment">//把对象添加到集合</span></span><br><span class="line">				ar.add(st);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		br.close();</span><br><span class="line">		<span class="comment">//用增强for循环查看写入集合后的内容</span></span><br><span class="line">		<span class="keyword">for</span> (Student s : ar) &#123;</span><br><span class="line">			System.out.println(s.getName() + <span class="string">","</span> + s.getCj());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 对List集合进行排序操作，这儿使用匿名内部类Collections来完成</span></span><br><span class="line">		Collections.sort(ar, <span class="keyword">new</span> Comparator&lt;Student&gt;() &#123;</span><br><span class="line">			<span class="comment">//重写该方法</span></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Student s1, Student s2)</span> </span>&#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">				<span class="comment">// 排序主要条件：按成绩排序</span></span><br><span class="line">				<span class="keyword">int</span> num = s1.getCj() - s2.getCj();</span><br><span class="line">				<span class="keyword">return</span> num;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">//用增强for循环查看排序后的结果</span></span><br><span class="line">		<span class="keyword">for</span> (Student s : ar) &#123;</span><br><span class="line">			System.out.println(s.getName() + <span class="string">","</span> + s.getCj());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 把排序好的信息写进指定文件</span></span><br><span class="line">		<span class="comment">//创建字符缓冲输出流对象</span></span><br><span class="line">		BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"E:/dcg.txt"</span>));</span><br><span class="line">		<span class="comment">//由于跳过了第一行标题，写入的时候手动添加进去</span></span><br><span class="line">		bw.write(<span class="string">"姓名   成绩\n"</span>);</span><br><span class="line">		<span class="keyword">for</span> (Student s : ar) &#123;</span><br><span class="line">			bw.write(s.getName() + <span class="string">"   "</span> + s.getCj());</span><br><span class="line">			bw.newLine();</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		bw.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后输入文件内容为</p>
-<pre><code>姓名   成绩
-李四   20
-张三   50
-赵六   60
-王五   100</code></pre>]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>javaio</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javaStringBuilder</title>
-    <url>/2020/04/12/javaStringBuilder/</url>
-    <content><![CDATA[<p>如果对字符串拼接，每次拼接，都会创建一个新的String对象，即耗时又浪费内存空间，而这种操作又是不可避免的，我们就可以通过Java提供的StringBuilder类来解决这个问题。<br>StringBuilder是一个可变(对象中的内容可变)的字符串类，我们可以把它看成一个容器</p>
-<p>StringBuilder：可变<br>String：不可变<br>构造方法<br>public StringBuilder（）；<br>public StringBuilder（String str）;</p>
-<p>方法<br>public StringBuilder append（任意类型）； 添加数据，并<strong>返回对象本身</strong><br>大量字符串连接一定要用append（）方法，可以完成String的拼接，并且比String+的效率高N倍（由于String的拼接每次会创建新的对象）<br>    例：String s1=”abc”; String s2=”def”; s1+s2=”abcdef”;<br>    StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)…由于<strong>返回的是对象本身</strong>所以可以继续调用对象的方法，此方法也叫链式编程</p>
-<p>public StringBuilder reverse（）； 返回<strong>相反的字符序列</strong><br>例：StringBuilder sb = new StringBuilder();<br>    sb.append(“abc”).append(“def”)  输出sb为<strong>abcdef</strong><br>    sb.reverse;  输出sb为<strong>fedcba</strong></p>
-<p>StringBuilder 转换为String 通过toString()<br>StringBuilder sb = new StringBuilder();<br>String s = sb.toString;</p>
-<p>String 转换为StringBuilder 通过构造方法实现<br>String s = “abc”;<br>StringBuilder sb = new StringBuilder(s);</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>String</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java数据结构</title>
     <url>/2020/04/12/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<p><strong>栈</strong>：一种特殊的线性表，只允许在固定的一端进行插入和删除元素操作。进行数据插入和删除操作的一段称为栈顶，另一端称为栈底。栈中的数据元素遵守后进先出的原则。（吃了吐）<br><img src="https://img-blog.csdnimg.cn/20200306113004310.png" alt="在这里插入图片描述"><br><strong>压栈</strong>：栈的插入操作叫做进栈/压栈/入栈，入数据在栈底。<br><strong>出栈</strong>：栈的删除操作叫出栈，出数据在栈顶。<br><img src="https://img-blog.csdnimg.cn/2020030611303764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>队列</strong>：是另一种操作受限的线性表，是指只允许在表的一端进行插入操作的数据结构，具有“先进先出”的特点。（吃了拉）<br><img src="https://img-blog.csdnimg.cn/20200306113223725.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>队列分为两种，一种为顺序队列，一种为链队列。在这里重点讲顺序循环队列</p>
@@ -356,38 +388,6 @@
       </categories>
       <tags>
         <tag>javaData</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java异常</title>
-    <url>/2020/04/12/java%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200303195708621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt=""></p>
-<h2 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a><strong>Throwable</strong></h2><p><img src="https://img-blog.csdnimg.cn/20200303203116445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="Java异常情况为两种Error错误和Excepion异常"><a href="#Java异常情况为两种Error错误和Excepion异常" class="headerlink" title="Java异常情况为两种Error错误和Excepion异常"></a><strong>Java异常情况为两种Error错误和Excepion异常</strong></h2><p>Error错误,指的是Java运行时的内部错误和资源耗尽错误，应用程序不会<br>抛出此类异常，一般情况会告知用户并自动结束程序，很少出现</p>
-<p>Excepion,异常又分为编译时异常和运行时异常，编译时异常会在程序编写界面直接提示错误（如包找不到，语法错误等）；运行时异常 会在代码运行的时候报错，常见有：</p>
-<p>IndexOutOfBoundsException：索引越界异常</p>
-<p>ArrayIndexOutOfBoundsException：数组越界异常</p>
-<p>ArithmeticException：算数运算异常</p>
-<p>IllegalArgumentException：非法参数异常</p>
-<p>ClassCastException：类型转换异常</p>
-<p>ClassNotFoundException：类未找到异常</p>
-<p>NullPointerException：空指针异常</p>
-<p>NumberFormatException：数据格式异常</p>
-<p>FileNotFoundException：文件未找到异常</p>
-<p>NoSuchElementException：没有这个元素异常（迭代器中到了末尾，还继续访问）</p>
-<h2 id="JVM的默认处理方案"><a href="#JVM的默认处理方案" class="headerlink" title="JVM的默认处理方案"></a><strong>JVM的默认处理方案</strong></h2><p>如果程序出现了异常，我们又没有处理该异常，最终JVM会做默认处理<br>JVM会把异常的名称，原因，位置等信息显示在控制台上 然后程序停止执行</p>
-<p><strong>异常处理try…catch</strong><br><img src="https://img-blog.csdnimg.cn/20200303203645830.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200303203743389.png" alt="在这里插入图片描述"></p>
-<p>执行流程<br>程序从try{}开始执行，当程序出现异常时，会自动生成一个异常类对象，该异常对象会被提交给java运行时系统，Java运行时系统会在接受到异常后，到catch中去寻找匹配的异常类，找到后进行异常处理，处理完毕程序可以接着往后边执行</p>
-<h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a><strong>自定义异常类</strong></h2><p>用户自定义异常都应该继承Exception基类，如果希望自定义Runtime异常，则应该继承RuntimeException基类，定义异常类时通常需要提供两个构造器，一个是无参数构造器，另一个是需要一个字符串参数的构造器，这个字符串作为该异常信息的描述信息（也就是异常对象的getMessage()方法返回的值）</p>
-<p><img src="https://img-blog.csdnimg.cn/20200303203531155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hvbHlMb3JkSGFuQ2hhdW4=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="throws"><a href="#throws" class="headerlink" title="throws"></a><strong>throws</strong></h2><p>虽然我们可以通过try catch 来处理异常，但并不是任何情况我们都有异常处理的权限，又时候我们处理不累异常，因此Java为我们提供了throws的解决方案<br>格式：<br>public 方法名（）throws 异常类名{}</p>
-<p><strong>throws和throw的区别</strong><br><img src="https://img-blog.csdnimg.cn/20200303203302138.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>javaExcepion</tag>
       </tags>
   </entry>
 </search>

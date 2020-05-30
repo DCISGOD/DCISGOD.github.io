@@ -284,8 +284,8 @@ a {
   word-wrap: break-word;
 }
 a:hover {
-  color: #222;
-  border-bottom-color: #222;
+  color: #000;
+  border-bottom-color: #000;
 }
 blockquote {
   margin: 0;
@@ -412,7 +412,7 @@ table>tbody>tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
 table>tbody>tr:hover {
-  background-color: #f5f5f5;
+  background-color: #f5fffa;
 }
 caption,
 th,
@@ -906,7 +906,7 @@ pre .javascript .function {
   width: 1.285714285714286em;
 }
 .post-body .tabs ul.nav-tabs li.tab.active {
-  border-top: 3px solid #fc6423;
+  border-top: 3px solid #000;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   background-color: #fff;
@@ -914,7 +914,7 @@ pre .javascript .function {
 @media (max-width: 413px) {
   .post-body .tabs ul.nav-tabs li.tab.active {
     border-top: 1px solid #ddd;
-    border-left: 3px solid #fc6423;
+    border-left: 3px solid #000;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
   }
@@ -942,7 +942,7 @@ pre .javascript .function {
   font-size: 14px;
   color: #555;
   background: transparent;
-  border: 2px solid #222;
+  border: 2px solid #000;
   text-decoration: none;
   border-radius: 0;
   transition-property: background-color;
@@ -952,8 +952,8 @@ pre .javascript .function {
   line-height: 2;
 }
 .btn:hover {
-  border-color: #222;
-  color: #222;
+  border-color: #000;
+  color: #000;
   background: #fff;
 }
 .btn +.btn {
@@ -1011,7 +1011,7 @@ pre .javascript .function {
 .pagination .prev:hover,
 .pagination .next:hover,
 .pagination .page-number:hover {
-  border-top-color: #222;
+  border-top-color: #000;
 }
 .pagination .space {
   padding: 0;
@@ -1043,7 +1043,7 @@ pre .javascript .function {
   .pagination .prev:hover,
   .pagination .next:hover,
   .pagination .page-number:hover {
-    border-bottom-color: #222;
+    border-bottom-color: #000;
   }
 }
 .comments {
@@ -1064,7 +1064,7 @@ pre .javascript .function {
   z-index: 1050;
   padding: 0 6px;
   width: 24px;
-  background: #222;
+  background: #000;
   font-size: 12px;
   opacity: 1;
   color: #fff;
@@ -1097,7 +1097,7 @@ pre .javascript .function {
 }
 .headband {
   height: 3px;
-  background: #222;
+  background: #000;
 }
 .site-meta {
   margin: 0;
@@ -1112,12 +1112,12 @@ pre .javascript .function {
   position: relative;
   display: inline-block;
   padding: 0 40px;
-  color: #222;
-  background: #222;
+  color: #000;
+  background: #000;
   border-bottom: none;
 }
 .brand:hover {
-  color: #222;
+  color: #000;
 }
 .logo {
   display: inline-block;
@@ -1210,7 +1210,7 @@ pre .javascript .function {
   transition-delay: 0s;
 }
 .menu .menu-item a:hover {
-  border-bottom-color: #222;
+  border-bottom-color: #000;
 }
 .menu .menu-item .fa {
   margin-right: 5px;
@@ -1358,7 +1358,7 @@ pre .javascript .function {
   margin-left: -2px;
   width: 4px;
   height: 100%;
-  background: #f5f5f5;
+  background: #f5fffa;
   z-index: -1;
 }
 @media (max-width: 767px) {
@@ -1421,7 +1421,7 @@ pre .javascript .function {
   border-bottom-color: #666;
 }
 .posts-collapse .post-header:hover::before {
-  background: #222;
+  background: #000;
 }
 .posts-collapse .post-meta {
   position: absolute;
@@ -1581,7 +1581,7 @@ pre .javascript .function {
   border-bottom: none;
 }
 .post-nav-item a:hover {
-  color: #222;
+  color: #000;
   border-bottom: none;
 }
 .post-nav-item a:active {
@@ -1786,7 +1786,7 @@ pre .javascript .function {
   width: 0;
   z-index: 1040;
   box-shadow: inset 0 2px 6px #000;
-  background: #222;
+  background: #000;
   -webkit-transform: translateZ(0);
 }
 .sidebar a {
@@ -1826,7 +1826,7 @@ pre .javascript .function {
   width: 14px;
   height: 14px;
   padding: 5px;
-  background: #222;
+  background: #000;
   line-height: 0;
   z-index: 1050;
   cursor: pointer;
@@ -1874,7 +1874,7 @@ pre .javascript .function {
 .site-author-name {
   margin: 5px 0 0;
   text-align: center;
-  color: #f5f5f5;
+  color: #f5fffa;
   font-weight: normal;
 }
 .site-description {
@@ -1951,7 +1951,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c90e87;
+  background: #e35c00;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1989,7 +1989,7 @@ pre .javascript .function {
   color: #555;
 }
 .sidebar-nav li:hover {
-  color: #f5f5f5;
+  color: #f5fffa;
 }
 .page-post-detail .sidebar-nav-toc {
   padding: 0 5px;
@@ -2736,7 +2736,7 @@ hr {
   margin-top: 80px;
 }
 .header {
-  background: #f5f5f5;
+  background: #f5fffa;
 }
 .header-inner {
   padding: 25px 0 20px;
@@ -2805,7 +2805,7 @@ hr {
   position: relative;
   display: block;
   height: 2px;
-  background: #222;
+  background: #000;
 }
 @media (max-width: 767px) {
   .logo-line-before i,
@@ -2920,7 +2920,7 @@ hr {
   }
 }
 .posts-expand .post-title:hover:before {
-  background: #222;
+  background: #000;
 }
 @media (max-width: 767px) {
   .posts-expand .post-body {
@@ -2935,7 +2935,7 @@ hr {
 }
 .posts-expand .post-tags a {
   padding: 1px 5px;
-  background: #f5f5f5;
+  background: #f5fffa;
   border-bottom: none;
 }
 .posts-expand .post-tags a:hover {
@@ -2967,7 +2967,7 @@ hr {
   }
 }
 .post-button a:hover {
-  border-bottom-color: #222;
+  border-bottom-color: #000;
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
@@ -3020,7 +3020,7 @@ hr {
 .footer {
   margin-top: 80px;
   padding: 10px 0;
-  background: #f5f5f5;
+  background: #f5fffa;
   color: #666;
 }
 .footer-inner {
