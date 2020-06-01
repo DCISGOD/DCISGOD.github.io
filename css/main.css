@@ -425,7 +425,7 @@ td {
 th,
 td {
   border-bottom: 3px solid #eee;
-  border-right: 1px solid #f5fffa;
+  border-right: 1px solid #6495ed;
 }
 th {
   padding-bottom: 10px;
@@ -453,7 +453,7 @@ body {
   }
 }
 .main {
-  padding-bottom: 150px;
+  padding-bottom: 103px;
 }
 .main-inner {
   margin: 0 auto;
@@ -469,7 +469,7 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  min-height: 50px;
+  min-height: 3px;
 }
 .footer-inner {
   box-sizing: border-box;
@@ -499,7 +499,7 @@ code {
   padding: 2px 4px;
   word-wrap: break-word;
   color: #555;
-  background: #f5fffa;
+  background: #6495ed;
   border-radius: 3px;
   font-size: 13px;
 }
@@ -745,7 +745,7 @@ pre .javascript .function {
   position: relative;
   padding: 15px;
   margin-bottom: 20px;
-  border: 1px solid #f5fffa;
+  border: 1px solid #6495ed;
   border-left-width: 5px;
   border-radius: 3px;
 }
@@ -976,7 +976,7 @@ pre .javascript .function {
 .pagination {
   margin: 120px 0 40px;
   text-align: center;
-  border-top: 1px solid #f5fffa;
+  border-top: 1px solid #6495ed;
 }
 .page-number-basic,
 .pagination .prev,
@@ -1002,7 +1002,7 @@ pre .javascript .function {
 .pagination .next,
 .pagination .page-number {
   border-bottom: 0;
-  border-top: 1px solid #f5fffa;
+  border-top: 1px solid #6495ed;
   transition-property: border-color;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -1037,7 +1037,7 @@ pre .javascript .function {
   .pagination .page-number {
     margin-bottom: 10px;
     border-top: 0;
-    border-bottom: 1px solid #f5fffa;
+    border-bottom: 1px solid #6495ed;
     padding: 0 10px;
   }
   .pagination .prev:hover,
@@ -1560,7 +1560,7 @@ pre .javascript .function {
   display: table;
   margin-top: 15px;
   width: 100%;
-  border-top: 1px solid #f5fffa;
+  border-top: 1px solid #6495ed;
 }
 .post-nav-divider {
   display: table-cell;
@@ -1794,7 +1794,7 @@ pre .javascript .function {
   border-bottom-color: #555;
 }
 .sidebar a:hover {
-  color: #f5fffa;
+  color: #6495ed;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .sidebar {
@@ -1857,8 +1857,8 @@ pre .javascript .function {
 .site-author-image {
   display: block;
   margin: 0 auto;
-  padding: 2px;
-  max-width: 96px;
+  padding: 5px;
+  max-width: 100px;
   height: auto;
   border: 2px solid $black-dim;
   border-radius: 100%;
@@ -1874,7 +1874,7 @@ pre .javascript .function {
 .site-author-name {
   margin: 5px 0 0;
   text-align: center;
-  color: #f5fffa;
+  color: #000;
   font-weight: normal;
 }
 .site-description {
@@ -1951,7 +1951,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6139ff;
+  background: #ff0eff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1986,10 +1986,10 @@ pre .javascript .function {
   cursor: pointer;
   border-bottom: 1px solid transparent;
   font-size: 14px;
-  color: #555;
+  color: #000;
 }
 .sidebar-nav li:hover {
-  color: #f5fffa;
+  color: #000;
 }
 .page-post-detail .sidebar-nav-toc {
   padding: 0 5px;
@@ -1998,11 +1998,11 @@ pre .javascript .function {
   margin-left: 10px;
 }
 .sidebar-nav .sidebar-nav-active {
-  color: #87daff;
-  border-bottom-color: #87daff;
+  color: #4169e1;
+  border-bottom-color: #4169e1;
 }
 .sidebar-nav .sidebar-nav-active:hover {
-  color: #87daff;
+  color: #4169e1;
 }
 .sidebar-panel {
   display: none;
@@ -2039,7 +2039,7 @@ pre .javascript .function {
   border-bottom-color: #555;
 }
 .post-toc ol a:hover {
-  color: #191970;
+  color: #f00;
   border-bottom-color: #191970;
 }
 .post-toc .nav-item {
@@ -2062,14 +2062,14 @@ pre .javascript .function {
   display: block;
 }
 .post-toc .nav .active > a {
-  color: #87daff;
-  border-bottom-color: #87daff;
+  color: #4169e1;
+  border-bottom-color: #4169e1;
 }
 .post-toc .nav .active-current > a {
-  color: #87daff;
+  color: #4169e1;
 }
 .post-toc .nav .active-current > a:hover {
-  color: #87daff;
+  color: #4169e1;
 }
 .footer {
   font-size: 14px;
@@ -2709,7 +2709,7 @@ pre .javascript .function {
   }
 }
 .page-post-detail .sidebar-toggle-line {
-  background: #87daff;
+  background: #4169e1;
 }
 .page-post-detail .comments {
   overflow: hidden;
