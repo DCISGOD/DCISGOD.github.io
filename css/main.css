@@ -1952,7 +1952,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #58dacd;
+  background: #59ff9f;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3182,4 +3182,7 @@ hr {
   .menu .menu-item {
     margin: 0px 10px !important;
   }
+}
+.vpower.txt-right {
+  display: none;
 }
