@@ -370,6 +370,16 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/08/Servlet&HTTP&Request/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/08/Servlet&HTTP&Request/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -964,8 +974,8 @@ WIDGET = {FID: 'nK57ZNcSVG'}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/08/Cookie&Session/" rel="next" title="Cookie&Session">
-                <i class="fa fa-chevron-left"></i> Cookie&Session
+              <a href="/2020/06/08/BootStrap/" rel="next" title="Bootstrap 框架">
+                <i class="fa fa-chevron-left"></i> Bootstrap 框架
               </a>
             
           </div>
@@ -974,8 +984,8 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/06/08/JDBC/" rel="prev" title="JDBC">
-                JDBC <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/08/JQuery%E9%AB%98%E7%BA%A7/" rel="prev" title="JQuery 高级">
+                JQuery 高级 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1011,6 +1021,9 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -1417,6 +1430,28 @@ show_date_time();
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'f1AsUptL3Al7dawlHJEwjJtG-gzGzoHsz',
+        appKey: 'QreeH7n47rA5g83BCqx0pVVu',
+        placeholder: '欢迎评论',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

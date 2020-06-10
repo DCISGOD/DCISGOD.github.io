@@ -370,6 +370,16 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/08/BootStrap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/08/BootStrap/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -855,8 +865,8 @@ WIDGET = {FID: 'nK57ZNcSVG'}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/08/MySQL%E7%BA%A6%E6%9D%9F%E8%AF%BE%E5%A0%82/" rel="next" title="MySQL 约束">
-                <i class="fa fa-chevron-left"></i> MySQL 约束
+              <a href="/2020/06/08/JavaScript%E9%AB%98%E7%BA%A7/" rel="next" title="JavaScript 高级">
+                <i class="fa fa-chevron-left"></i> JavaScript 高级
               </a>
             
           </div>
@@ -865,8 +875,8 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/06/08/Response/" rel="prev" title="Response 对象">
-                Response 对象 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/08/Servlet&HTTP&Request/" rel="prev" title="Servlet&HTTP&Request">
+                Servlet&HTTP&Request <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -902,6 +912,9 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -1308,6 +1321,28 @@ show_date_time();
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'f1AsUptL3Al7dawlHJEwjJtG-gzGzoHsz',
+        appKey: 'QreeH7n47rA5g83BCqx0pVVu',
+        placeholder: '欢迎评论',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

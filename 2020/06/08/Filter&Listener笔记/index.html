@@ -370,6 +370,16 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/08/Filter&Listener%E7%AC%94%E8%AE%B0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/08/Filter&Listener%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -665,8 +675,8 @@ WIDGET = {FID: 'nK57ZNcSVG'}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/08/JDBC/" rel="next" title="JDBC">
-                <i class="fa fa-chevron-left"></i> JDBC
+              <a href="/2020/06/08/HTML&CSS/" rel="next" title="HTML&CSS">
+                <i class="fa fa-chevron-left"></i> HTML&CSS
               </a>
             
           </div>
@@ -675,8 +685,8 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/06/08/HTML&CSS/" rel="prev" title="HTML&CSS">
-                HTML&CSS <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/08/redis/" rel="prev" title="redis">
+                redis <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -712,6 +722,9 @@ WIDGET = {FID: 'nK57ZNcSVG'}
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -1118,6 +1131,28 @@ show_date_time();
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'f1AsUptL3Al7dawlHJEwjJtG-gzGzoHsz',
+        appKey: 'QreeH7n47rA5g83BCqx0pVVu',
+        placeholder: '欢迎评论',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
